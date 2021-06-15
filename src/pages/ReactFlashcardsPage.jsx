@@ -21,6 +21,18 @@ export default function ReactFlashcardsPage() {
 
     function handleRadioClick() {
         setShowTile(showTitle => !showTitle);
+        const updatedFlashcards = [...allCards].map((card) => {
+            return {...card, showTitle: !showTitle};
+        })
+        setAllCards(updatedFlashcards);
+    }
+
+    function handleCardClick(cardId) {
+        const updatedFlashcards = [...allCards];
+        const cardIndex = allCards.findIndex((card) => card.id === cardId);
+        updatedFlashcards[cardIndex].showTitle = !updatedFlashcards[cardIndex].showTitle; 
+        console.log(updatedFlashcards[cardIndex])
+        setAllCards(updatedFlashcards);
     }
 
     return (
@@ -50,8 +62,13 @@ export default function ReactFlashcardsPage() {
                     
                     <div className="border flex flex-wrap p-4 flex-auto justify-center flex-row">
                         {
-                            allCards.map(({id, title, description}) => {
-                                return <Flashcard key={id} title={title} description={description} showTitle={showTitle} />
+                            allCards.map(({id, title, description, showTitle}) => {
+                                return <Flashcard key={id}
+                                    id={id}
+                                    title={title}
+                                    description={description}
+                                    onCardClick={handleCardClick}
+                                    showTitle={showTitle} />
                             })
                         }
                     </div>
