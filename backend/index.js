@@ -1,6 +1,7 @@
-import { getNewId } from "../services/idService";
+const uuid = require("uuid").v4;
+const fs = require("fs").promises;
 
-export const flashCardsData = [
+const allFlashCards = [
   {
     title: "JSX",
     description:
@@ -52,6 +53,13 @@ export const flashCardsData = [
   },
 ]
   .map((item) => {
-    return { id: getNewId(), ...item, showTitle: true };
+    return { id: uuid(), ...item, showTitle: true };
   })
   .sort((a, b) => a.title.localeCompare(b.title));
+
+(async function () {
+  fs.writeFile(
+    "./flashCards.json",
+    JSON.stringify({ flashCards: allFlashCards }, null, 2)
+  );
+})();

@@ -1,0 +1,17 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "fake backend with json-server",
+  "main": "index.js",
+  "author": "Jonas Gerosa",
+  "license": "MIT",
+  "devDependencies": {
+    "json-server": "0.16.3"
+  },
+  "dependencies": {
+    "v4": "^0.0.1"
+  },
+  "scripts": {
+    "server": "json-server --watch ./flashCards.json --port 3001"
+  }
+}
